@@ -26,6 +26,18 @@ function App() {
     } else {
       alert("It's already on your list");
     }
+
+    addToList(park);
+  }
+
+  function addToList(park) {
+    fetch("http://localhost:3000/Favorites", {
+      method: "POST",
+      headers: { "Content-type": "Application/json" },
+      body: JSON.stringify(park),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
   }
 
   return (
