@@ -5,10 +5,10 @@ import { Switch, Route } from "react-router-dom";
 import CardContainer from "./components/card_container";
 import { useState, useEffect } from "react";
 import Favorites from "./components/favorites";
-let apiKey = process.env.REACT_APP_Token;
 
 function App() {
-  console.log(apiKey);
+  const apiKey = process.env.REACT_APP_Token;
+
   const [parks, setParks] = useState([]);
   const [myParks, setMyParks] = useState([]);
 
@@ -31,10 +31,11 @@ function App() {
   }
 
   function addToList(park) {
-    fetch("http://localhost:3000/Favorites", {
+    console.log(park);
+    fetch("http://localhost:3000/Suggestions", {
       method: "POST",
       headers: { "Content-type": "Application/json" },
-      body: JSON.stringify(park),
+      body: JSON.stringify({ name: park.name }),
     })
       .then((res) => res.json())
       .then((data) => console.log(data));
