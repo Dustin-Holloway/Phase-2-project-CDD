@@ -5,15 +5,15 @@ import { Switch, Route } from "react-router-dom";
 import CardContainer from "./components/card_container";
 import { useState, useEffect } from "react";
 import Favorites from "./components/favorites";
+let apiKey = process.env.REACT_APP_Token;
 
 function App() {
+  console.log(apiKey);
   const [parks, setParks] = useState([]);
   const [myParks, setMyParks] = useState([]);
 
   useEffect(() => {
-    fetch(
-      "https://developer.nps.gov/api/v1/parks?park&api_key=aECBjwBHBmIjMnfhQhrNOpdqOzuavsf05ah4Fkia"
-    )
+    fetch(`https://developer.nps.gov/api/v1/parks?park&api_key=${apiKey}`)
       .then((res) => res.json())
       .then((data) => setParks(data.data));
   }, []);
